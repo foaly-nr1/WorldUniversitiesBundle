@@ -1,0 +1,14 @@
+parameters:
+  fl_world_universities.config_key: !php/const:FL\WorldUniversitiesBundle\DependencyInjection\FlWorldUniversitiesExtension::CONFIG_KEY
+
+services:
+  fl_world_universities.service:
+    class: FL\WorldUniversitiesBundle\Service\WorldUniversitiesService
+    arguments:
+      - "@=parameter(parameter('fl_world_universities.config_key'))"
+
+  fl_world_universities.type:
+    class: FL\WorldUniversitiesBundle\Form\Type\WorldUniversitiesType
+    arguments: ["@fl_world_universities.service"]
+    tags:
+      - { name: form.type }

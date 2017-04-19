@@ -1,0 +1,30 @@
+{
+  "name": "fourlabs/world-universities-bundle",
+  "version": "0.1.0",
+  "description": "",
+  "license": "MIT",
+  "homepage": "https://github.com/foaly-nr1/WorldUniversitiesBundle",
+  "keywords": [
+    "Symfony", "university", "universities"
+  ],
+  "authors": [
+    {
+      "name": "Jonny Schmid",
+      "email": "hi@jonnyschmid.com",
+    }
+  ],
+  "require": {
+    "php": ">=7.0",
+    "symfony/config": "~2.8|~3.0|~3.1",
+    "symfony/console": "~2.8|~3.0|~3.1",
+    "symfony/dependency-injection": "~2.8|~3.0|~3.1",
+    "symfony/expression-language": "~2.8|~3.0|~3.1",
+    "symfony/form": "~2.8|~3.0|~3.1",
+    "league/csv": "^8.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "FL\\WorldUniversitiesBundle\\": ""
+    }
+  }
+}
