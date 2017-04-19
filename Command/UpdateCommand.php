@@ -14,8 +14,7 @@ class UpdateCommand extends ContainerAwareCommand
     {
         $this
             ->setName('fl:world-universities:update')
-            ->setDescription('Updates the world universities CSV file')
-        ;
+            ->setDescription('Updates the world universities CSV file');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -29,6 +28,7 @@ class UpdateCommand extends ContainerAwareCommand
         $tmpFile = $this->downloadFile($config['source']);
         if (false === $tmpFile) {
             $io->error('Error during file download occurred');
+
             return;
         }
 
@@ -59,7 +59,7 @@ class UpdateCommand extends ContainerAwareCommand
         }
 
         if (!@copy($source, $tmpFile)) {
-            return null;
+            return;
         }
 
         return $tmpFile;
