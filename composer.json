@@ -1,7 +1,7 @@
 {
   "name": "fourlabs/world-universities-bundle",
   "version": "0.1.0",
-  "description": "",
+  "description": "Symfony ChoiceType listing the world's universities",
   "license": "MIT",
   "homepage": "https://github.com/foaly-nr1/WorldUniversitiesBundle",
   "keywords": [
