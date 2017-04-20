@@ -9,6 +9,6 @@ services:
 
   fl_world_universities.type:
     class: FL\WorldUniversitiesBundle\Form\Type\WorldUniversitiesType
-    arguments: ["@fl_world_universities.service"]
+    arguments: ["@fl_world_universities.service", "@request_stack"]
     tags:
       - { name: form.type }

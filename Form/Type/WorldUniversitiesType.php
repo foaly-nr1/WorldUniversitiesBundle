@@ -5,6 +5,7 @@ namespace FL\WorldUniversitiesBundle\Form\Type;
 use FL\WorldUniversitiesBundle\Service\WorldUniversitiesService;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class WorldUniversitiesType extends AbstractType
@@ -14,9 +15,17 @@ class WorldUniversitiesType extends AbstractType
      */
     private $worldUniversitiesService;
 
-    public function __construct(WorldUniversitiesService $worldUniversitiesService)
-    {
+    /**
+     * @var string
+     */
+    private $locale;
+
+    public function __construct(
+        WorldUniversitiesService $worldUniversitiesService,
+        RequestStack $requestStack
+    ) {
         $this->worldUniversitiesService = $worldUniversitiesService;
+        $this->locale = $requestStack->getCurrentRequest()->getLocale();
     }
 
     public function getParent()
@@ -24,15 +33,22 @@ class WorldUniversitiesType extends AbstractType
         return ChoiceType::class;
     }
 
+    private function getCountryName(string $countryCode)
+    {
+        return \Locale::getDisplayRegion('-'.$countryCode, $this->locale);
+    }
+
     public function configureOptions(OptionsResolver $resolver)
     {
         $choices = [];
         foreach ($this->worldUniversitiesService->getReader() as $row) {
-            if (!array_key_exists($row[0], $choices)) {
-                $choices[$row[0]] = [];
+            $countryName = $this->getCountryName($row[0]);
+
+            if (!array_key_exists($countryName, $choices)) {
+                $choices[$countryName] = [];
             }
 
-            $choices[$row[0]][$row[1]] = $row[1];
+            $choices[$countryName][$row[1]] = $row[1];
         }
 
         $resolver->setDefaults([
